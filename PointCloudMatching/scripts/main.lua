@@ -12,11 +12,11 @@
   Various pre-processing steps are done to reduce the data before matching.
   
   How to run:
-  The script is self-contained. Adjust the variable WAIT to reduce the
+  The script is self-contained. Adjust the variable DELAY to reduce the
   between the pre-processing steps.
          
 ------------------------------------------------------------------------------]]
-WAIT = 2000
+DELAY = 2000
 
 
 -- view handle
@@ -39,7 +39,7 @@ local cloud = PointCloud.load("resources/data.ply")
 v:clear()
 v:addPointCloud(cloud)
 v:present("ASSURED")
-Script.sleep(WAIT)
+Script.sleep(DELAY)
 
 -------------------------------------------------------------------------------------
 -- 2.) Prepare a bounding box to cut out relevant part of the scene
@@ -47,7 +47,7 @@ local transform = Transform.createTranslation3D(0, 120, 400)
 local box = Shape3D.createBox(260, 360, 200, transform)
 v:addShape(box, shapeDeco)
 v:present("ASSURED")
-Script.sleep(WAIT)
+Script.sleep(DELAY)
 
 -------------------------------------------------------------------------------------
 -- 3.) Now cut the relevant part of the scene
@@ -56,7 +56,7 @@ local cloudCropped = cloud:extractIndices(inlieres)
 v:clear()
 v:addPointCloud(cloudCropped)
 v:present("ASSURED")
-Script.sleep(WAIT)
+Script.sleep(DELAY)
 
 -------------------------------------------------------------------------------------
 -- 4.) Fit a plane-model to reduce data further
@@ -67,7 +67,7 @@ local planePoints, inlierIndices = shapeFitter:fitPlane(cloudCropped)
 cloudCropped:setIntensity(inlierIndices, 1)
 v:addPointCloud(cloudCropped)
 v:present("ASSURED")
-Script.sleep(WAIT)
+Script.sleep(DELAY)
 
 -------------------------------------------------------------------------------------
 -- 5.) Remove all inlier points of the plane-fit from the data
