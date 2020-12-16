@@ -20,7 +20,7 @@ DELAY = 2000
 
 
 -- view handle
-local v = View.create()
+local v = View.create('viewer3D1')
 
 -- decoration for Shape
 shapeDeco = View.ShapeDecoration.create()
